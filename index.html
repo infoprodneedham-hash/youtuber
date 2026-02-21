@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 15 YouTube Creators | Gamer Hub</title>
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a0a0c;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--neon-purple);
+        }
+
+        /* The 5-Column Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .channel-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(188, 19, 254, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            text-decoration: none;
+            color: white;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 0 20px var(--neon-purple);
+            border-color: var(--neon-blue);
+        }
+
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.6);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .channel-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .info {
+            padding: 15px;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .rank {
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: 1rem;
+            margin: 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 1000px) { .grid-container { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .grid-container { grid-template-columns: repeat(1, 1fr); } }
+    </style>
+</head>
+<body>
+
+    <h1>Global Leaderboard</h1>
+
+    <div class="grid-container">
+        <a href="https://www.youtube.com/@MrBeast" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/fxG_Ex3qc5ix_EBMls_nS9I4P9vscO_pIAn77v6reC6_EunG9_t88QY-hA7I3uLY6XgU0f-F=s176-c-k-c0x00ffffff-no-rj" alt="MrBeast"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#1</div><div class="name">MrBeast</div></div>
+        </a>
+        <a href="https://www.youtube.com/@tseries" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/v_InS89MvpCpkC9Fd_S_S3YUsfSUn_p9v7K3F7z-r54S0f_S_vS0f_S_vS0f_S=s176-c-k-c0x00ffffff-no-rj" alt="T-Series"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#2</div><div class="name">T-Series</div></div>
+        </a>
+        <a href="https://www.youtube.com/@Cocomelon" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_nN6j-X6Y_p3W7zPj_M=s176-c-k-c0x00ffffff-no-rj" alt="Cocomelon"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#3</div><div class="name">Cocomelon</div></div>
+        </a>
+        <a href="https://www.youtube.com/@setindia" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_mQ9_vS=s176-c-k-c0x00ffffff-no-rj" alt="SET India"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#4</div><div class="name">SET India</div></div>
+        </a>
+        <a href="https://www.youtube.com/@vladandniki" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_k9_vS=s176-c-k-c0x00ffffff-no-rj" alt="Vlad and Niki"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#5</div><div class="name">Vlad and Niki</div></div>
+        </a>
+
+        <a href="https://www.youtube.com/@KidsDianaShow" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_m8_vS=s176-c-k-c0x00ffffff-no-rj" alt="Kids Diana Show"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#6</div><div class="name">Kids Diana Show</div></div>
+        </a>
+        <a href="https://www.youtube.com/@StokesTwins" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_n7_vS=s176-c-k-c0x00ffffff-no-rj" alt="Stokes Twins"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#7</div><div class="name">Stokes Twins</div></div>
+        </a>
+        <a href="https://www.youtube.com/@LikeNastya" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_l6_vS=s176-c-k-c0x00ffffff-no-rj" alt="Like Nastya"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#8</div><div class="name">Like Nastya</div></div>
+        </a>
+        <a href="https://www.youtube.com/@KIMPRO" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_j5_vS=s176-c-k-c0x00ffffff-no-rj" alt="KIMPRO"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#9</div><div class="name">김프로KIMPRO</div></div>
+        </a>
+        <a href="https://www.youtube.com/@zeemusiccompany" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_i4_vS=s176-c-k-c0x00ffffff-no-rj" alt="Zee Music"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#10</div><div class="name">Zee Music Company</div></div>
+        </a>
+
+        <a href="https://www.youtube.com/@WWE" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_h3_vS=s176-c-k-c0x00ffffff-no-rj" alt="WWE"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#11</div><div class="name">WWE</div></div>
+        </a>
+        <a href="https://www.youtube.com/@PewDiePie" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_g2_vS=s176-c-k-c0x00ffffff-no-rj" alt="PewDiePie"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#12</div><div class="name">PewDiePie</div></div>
+        </a>
+        <a href="https://www.youtube.com/@GoldminesTelefilms" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_f1_vS=s176-c-k-c0x00ffffff-no-rj" alt="Goldmines"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#13</div><div class="name">Goldmines</div></div>
+        </a>
+        <a href="https://www.youtube.com/@AlejoIgoa" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_e0_vS=s176-c-k-c0x00ffffff-no-rj" alt="Alejo Igoa"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#14</div><div class="name">Alejo Igoa</div></div>
+        </a>
+        <a href="https://www.youtube.com/@sonysab" target="_blank" class="channel-card">
+            <div class="thumbnail"><img src="https://yt3.googleusercontent.com/ytc/AIdro_d9_vS=s176-c-k-c0x00ffffff-no-rj" alt="Sony SAB"><div class="play-overlay">▶ VIEW</div></div>
+            <div class="info"><div class="rank">#15</div><div class="name">Sony SAB</div></div>
+        </a>
+    </div>
+
+</body>
+</html>
