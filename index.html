@@ -3,133 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YT Leaderboard 2026 | Gamer Edition</title>
+    <title>YT Apex 2026 | Interactive Gamer Hub</title>
     <style>
         :root {
             --neon-cyan: #00f2ff;
             --neon-pink: #ff00ea;
             --bg-dark: #050505;
-            --card-glass: rgba(20, 20, 25, 0.8);
+            --card-glass: rgba(25, 25, 30, 0.9);
         }
 
         body {
             background-color: var(--bg-dark);
             color: #fff;
-            font-family: 'Oxanium', 'Rajdhani', sans-serif; /* High-tech gamer fonts */
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             padding: 40px 20px;
-            background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%);
+            overflow-x: hidden;
         }
 
-        /* Scanline Effect */
-        body::before {
-            content: " ";
+        /* Scanline Overlay */
+        body::after {
+            content: "";
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 4px, 3px 100%;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
             pointer-events: none;
-            z-index: 10;
+            z-index: 999;
         }
 
         h1 {
             text-align: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
-            letter-spacing: 8px;
-            margin-bottom: 50px;
+            letter-spacing: 6px;
             color: var(--neon-cyan);
-            text-shadow: 0 0 20px var(--neon-cyan);
+            text-shadow: 0 0 15px var(--neon-cyan);
+            margin-bottom: 50px;
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 25px;
+            gap: 20px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .channel-card {
             background: var(--card-glass);
-            border: 2px solid #333;
-            border-radius: 4px; /* Sharp gamer edges */
-            position: relative;
+            border: 1px solid #444;
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            display: block;
+            transition: 0.3s;
+            position: relative;
         }
 
         .channel-card:hover {
-            border-color: var(--neon-pink);
-            transform: scale(1.08) rotate(1deg);
-            box-shadow: 0 0 30px rgba(255, 0, 234, 0.4);
-            z-index: 5;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            transform: translateY(-5px);
         }
 
-        /* Thumbnail Container */
         .thumb-box {
             width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #111;
+            aspect-ratio: 16/9;
+            cursor: pointer;
             position: relative;
-            overflow: hidden;
         }
 
-        .thumb-box img {
+        .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .play-hint {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: 0.3s;
+            font-weight: bold; color: var(--neon-cyan);
+        }
+
+        .thumb-box:hover .play-hint { opacity: 1; }
+
+        .info-panel { padding: 15px; }
+
+        .channel-name { 
+            display: block; 
+            font-weight: bold; 
+            color: #fff; 
+            margin-bottom: 10px; 
+            font-size: 1rem;
+        }
+
+        /* Gamer Style Button */
+        .btn-channel {
+            display: inline-block;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.8) contrast(1.2);
+            padding: 8px 0;
+            text-align: center;
+            background: transparent;
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border-radius: 4px;
         }
 
-        /* Rank Badge */
-        .rank-tag {
-            position: absolute;
-            top: 10px;
-            left: 10px;
+        .btn-channel:hover {
             background: var(--neon-pink);
-            color: black;
-            font-weight: 900;
-            padding: 2px 10px;
-            font-size: 0.9rem;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-pink);
         }
 
-        .live-tag {
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            width: 80%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border: 2px solid var(--neon-cyan);
+            position: relative;
+        }
+
+        .close-modal {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: red;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            animation: blink 1s infinite;
+            top: -40px; right: 0;
+            color: #fff; font-size: 2rem; cursor: pointer;
         }
-
-        .info-panel {
-            padding: 12px;
-            border-top: 1px solid #333;
-            background: rgba(0,0,0,0.5);
-        }
-
-        .channel-name {
-            font-weight: bold;
-            color: var(--neon-cyan);
-            margin-bottom: 4px;
-            display: block;
-        }
-
-        .video-title {
-            font-size: 0.75rem;
-            color: #aaa;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
 
         @media (max-width: 1100px) { .grid-container { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 700px) { .grid-container { grid-template-columns: repeat(1, 1fr); } }
@@ -137,175 +151,74 @@
 </head>
 <body>
 
-    <h1>2026 YouTube Apex</h1>
+    <h1>Global Top 15 Leaderboard</h1>
 
-    <div class="grid-container">
-        <a href="https://www.youtube.com/watch?v=sKnLQJtctXs" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#1</div>
-                <img src="https://img.youtube.com/vi/sKnLQJtctXs/maxresdefault.jpg" alt="MrBeast">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">MrBeast</span>
-                <div class="video-title">7 Days in a Deserted City</div>
-            </div>
-        </a>
+    <div class="grid-container" id="grid">
+        </div>
 
-        <a href="https://www.youtube.com/@tseries/videos" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#2</div>
-                <img src="https://img.youtube.com/vi/aqw-TzSXbL0/maxresdefault.jpg" alt="T-Series">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">T-Series</span>
-                <div class="video-title">Bollywood Hits 2026</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=ohHYABXMqUQ" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#3</div>
-                <img src="https://img.youtube.com/vi/ohHYABXMqUQ/maxresdefault.jpg" alt="Cocomelon">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Cocomelon</span>
-                <div class="video-title">New Year's Resolution 2026</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=iOrjlVg_qRs" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#4</div>
-                <img src="https://img.youtube.com/vi/iOrjlVg_qRs/maxresdefault.jpg" alt="SET India">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">SET India</span>
-                <div class="video-title">Grand Finale Highlights</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@vladandniki" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#5</div>
-                <img src="https://img.youtube.com/vi/BBDphdj5naM/maxresdefault.jpg" alt="Vlad and Niki">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Vlad & Niki</span>
-                <div class="video-title">The Secret Room Challenge</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=DBEIMAy2J5M" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#6</div>
-                <img src="https://img.youtube.com/vi/DBEIMAy2J5M/maxresdefault.jpg" alt="Kids Diana Show">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Kids Diana Show</span>
-                <div class="video-title">Let's Buckle Up Story</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@StokesTwins" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#7</div>
-                <div class="live-tag">NEW</div>
-                <img src="https://img.youtube.com/vi/87.87M/hqdefault.jpg" alt="Stokes Twins">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Stokes Twins</span>
-                <div class="video-title">PRANKING MY BROTHER FOR 24 HOURS</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=euCB8qU4Y0I" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#8</div>
-                <img src="https://img.youtube.com/vi/euCB8qU4Y0I/maxresdefault.jpg" alt="Like Nastya">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Like Nastya</span>
-                <div class="video-title">Fly Girl (Official Music Video)</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@KIMPRO" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#9</div>
-                <img src="https://img.youtube.com/vi/GhostFile/hqdefault.jpg" alt="KIMPRO">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">KIMPRO</span>
-                <div class="video-title">Extreme Shorts Challenge</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@zeemusiccompany" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#10</div>
-                <img src="https://img.youtube.com/vi/12minute/hqdefault.jpg" alt="Zee Music">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Zee Music</span>
-                <div class="video-title">Latest Movie Soundtracks</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=f-N-S2tX_70" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#11</div>
-                <img src="https://img.youtube.com/vi/LWfuDfvLU8E/maxresdefault.jpg" alt="WWE">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">WWE</span>
-                <div class="video-title">SmackDown Highlights Feb 20</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@PewDiePie" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#12</div>
-                <img src="https://img.youtube.com/vi/1782641931/hqdefault.jpg" alt="PewDiePie">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">PewDiePie</span>
-                <div class="video-title">Why I am quitting (Again)</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@GoldminesTelefilms" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#13</div>
-                <img src="https://img.youtube.com/vi/111B/hqdefault.jpg" alt="Goldmines">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Goldmines</span>
-                <div class="video-title">South Dubbed Blockbuster</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@AlejoIgoa" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#14</div>
-                <img src="https://img.youtube.com/vi/3.64B/hqdefault.jpg" alt="Alejo Igoa">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Alejo Igoa</span>
-                <div class="video-title">24 HORAS SIENDO PAPA</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@sonysab" target="_blank" class="channel-card">
-            <div class="thumb-box">
-                <div class="rank-tag">#15</div>
-                <img src="https://img.youtube.com/vi/134K/hqdefault.jpg" alt="Sony SAB">
-            </div>
-            <div class="info-panel">
-                <span class="channel-name">Sony SAB</span>
-                <div class="video-title">Taarak Mehta Ka Ooltah Chashmah</div>
-            </div>
-        </a>
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeBtn">&times;</span>
+            <iframe id="videoPlayer" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 
+    <script>
+        const creators = [
+            { name: "MrBeast", id: "sKnLQJtctXs", handle: "@MrBeast" },
+            { name: "T-Series", id: "aqw-TzSXbL0", handle: "@tseries" },
+            { name: "Cocomelon", id: "ohHYABXMqUQ", handle: "@Cocomelon" },
+            { name: "SET India", id: "iOrjlVg_qRs", handle: "@setindia" },
+            { name: "Vlad & Niki", id: "BBDphdj5naM", handle: "@vladandniki" },
+            { name: "Kids Diana Show", id: "DBEIMAy2J5M", handle: "@KidsDianaShow" },
+            { name: "Stokes Twins", id: "87.87M", handle: "@StokesTwins" },
+            { name: "Like Nastya", id: "euCB8qU4Y0I", handle: "@LikeNastya" },
+            { name: "KIMPRO", id: "k-pro-vid", handle: "@KIMPRO" },
+            { name: "Zee Music", id: "z-music-vid", handle: "@zeemusiccompany" },
+            { name: "WWE", id: "LWfuDfvLU8E", handle: "@WWE" },
+            { name: "PewDiePie", id: "1782641931", handle: "@PewDiePie" },
+            { name: "Goldmines", id: "gold-vid", handle: "@GoldminesTelefilms" },
+            { name: "Alejo Igoa", id: "alejo-vid", handle: "@AlejoIgoa" },
+            { name: "Sony SAB", id: "sab-vid", handle: "@sonysab" }
+        ];
+
+        const grid = document.getElementById('grid');
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('videoPlayer');
+        const closeBtn = document.getElementById('closeBtn');
+
+        creators.forEach((c, index) => {
+            const card = document.createElement('div');
+            card.className = 'channel-card';
+            card.innerHTML = `
+                <div class="thumb-box" onclick="openVideo('${c.id}')">
+                    <img src="https://img.youtube.com/vi/${c.id}/hqdefault.jpg" onerror="this.src='https://via.placeholder.com/480x270/111/00f2ff?text=Video+Thumbnail'">
+                    <div class="play-hint">WATCH TRAILER</div>
+                </div>
+                <div class="info-panel">
+                    <span class="channel-name">${index + 1}. ${c.name}</span>
+                    <a href="https://www.youtube.com/${c.handle}" target="_blank" class="btn-channel">Visit Channel</a>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        function openVideo(id) {
+            player.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+            modal.style.display = 'flex';
+        }
+
+        closeBtn.onclick = () => {
+            modal.style.display = 'none';
+            player.src = ""; // Stop video
+        };
+
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                player.src = "";
+            }
+        };
+    </script>
 </body>
 </html>
